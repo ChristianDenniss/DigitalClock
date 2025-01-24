@@ -1,0 +1,65 @@
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
+public class Colon 
+{
+
+    private Circle topDot;
+    private Circle bottomDot;
+    private boolean isOn;
+
+    
+    public Colon(double centerX, double centerY, double radius) 
+    {
+       
+        topDot = new Circle(centerX, centerY - 30, radius); 
+        
+        // Create the bottom circle of the colon
+        bottomDot = new Circle(centerX, centerY + 25, radius);
+        
+        this.isOn = true;
+        
+        
+        updateColor();
+    }
+
+  
+    public boolean isOn() 
+    {
+        return isOn;
+    }
+
+   
+    public void setOn(boolean isOn) 
+    {
+        this.isOn = isOn;
+        updateColor(); 
+    }
+
+   
+    private void updateColor() 
+    {
+        if (isOn) 
+        {
+           
+            topDot.setFill(Color.RED);
+            bottomDot.setFill(Color.RED);
+        } else 
+        {
+            bottomDot.setFill(Color.web("333333"));
+            topDot.setFill(Color.web("333333"));
+        }
+    }
+    
+    public Circle getTopDot() 
+    {
+        return topDot;
+    }
+
+    public Circle getBottomDot() 
+    {
+        return bottomDot;
+    }
+}
