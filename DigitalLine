@@ -1,0 +1,62 @@
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import java.time.LocalTime;
+
+public class DigitalLine extends Rectangle 
+{
+
+    
+    private boolean isOn;
+
+    
+    public DigitalLine(double x, double y, double width, double height) 
+    {
+       
+        super(x, y, width, height);
+        
+        
+        this.isOn = true;
+        
+        
+        updateColor();
+    }
+
+  
+    public boolean isOn() 
+    {
+        return isOn;
+    }
+
+   
+    public void setOn(boolean isOn) 
+    {   
+        System.out.println("Update setOn method called");
+        this.isOn = isOn;
+        updateColor(); 
+    }
+
+   
+    private void updateColor() 
+    {
+        System.out.println("Update color method called");
+        
+        if (isOn) 
+        {
+           
+            this.setFill(Color.RED);  
+        } else 
+        {
+        
+            this.setFill(Color.web("333333"));
+        }
+    }
+}
