@@ -1,0 +1,154 @@
+import javafx.scene.Group;
+
+public class Digits extends Group
+{
+    // Instance variables for the 7 lines that form the digit
+    private DigitalLine upperLeft;
+    private DigitalLine upperRight;
+    private DigitalLine lowerLeft;
+    private DigitalLine lowerRight;
+    private DigitalLine top;
+    private DigitalLine middle;
+    private DigitalLine bottom;
+
+    // Constructor that takes an initial position and size for the lines
+    public Digits(int digNum)
+    {
+        int x;
+        if(digNum==1)
+        {
+            x = 0;    
+        }
+        
+        else if(digNum==2)
+        {
+           x = 120; 
+        }
+        else if(digNum==3)
+        {
+           x = 290; 
+        }
+        else
+        {
+           x = 410; 
+        }
+        
+        this.upperLeft = new DigitalLine(80+x, 50, 10, 80);  
+        this.upperRight = new DigitalLine((80*2)+x, 50, 10, 80); 
+        this.lowerLeft = new DigitalLine((80)+x, 150, 10, 80);  
+        this.lowerRight = new DigitalLine((80*2)+x, 150, 10, 80);
+        this.top = new DigitalLine(90+x, 40, 70, 10); 
+        this.middle = new DigitalLine(90+x, 135, 70, 10); 
+        this.bottom = new DigitalLine(90+x, 230, 70, 10); 
+        
+        this.getChildren().addAll(upperLeft, upperRight, lowerLeft, lowerRight, top, middle, bottom);
+    }
+
+    // Method to set the digit value (0-9) and activate the corresponding lines
+    public void setDigit(int num)
+    {   
+        switch (num)
+        {
+            case 0:
+                upperLeft.setOn(true);
+                upperRight.setOn(true);
+                lowerLeft.setOn(true);
+                lowerRight.setOn(true);
+                top.setOn(true);
+                bottom.setOn(true);
+                middle.setOn(false);  // 0 doesn't have the middle line
+                break;
+            case 1:
+                upperLeft.setOn(false);
+                upperRight.setOn(true);
+                lowerLeft.setOn(false);
+                lowerRight.setOn(true);
+                top.setOn(false);
+                middle.setOn(false);
+                bottom.setOn(false);
+                break;
+            case 2:
+                upperLeft.setOn(false);
+                upperRight.setOn(true);
+                lowerLeft.setOn(true);
+                lowerRight.setOn(false);
+                top.setOn(true);
+                middle.setOn(true);
+                bottom.setOn(true);
+                break;
+            case 3:
+                upperLeft.setOn(false);
+                upperRight.setOn(true);
+                lowerLeft.setOn(false);
+                lowerRight.setOn(true);
+                top.setOn(true);
+                middle.setOn(true);
+                bottom.setOn(true);
+                break;
+            case 4:
+                upperLeft.setOn(false);
+                upperRight.setOn(true);
+                lowerLeft.setOn(false);
+                lowerRight.setOn(true);
+                top.setOn(false);
+                middle.setOn(true);
+                bottom.setOn(false);
+                break;
+            case 5:
+                upperLeft.setOn(true);
+                upperRight.setOn(false);
+                lowerLeft.setOn(false);
+                lowerRight.setOn(true);
+                top.setOn(true);
+                middle.setOn(true);
+                bottom.setOn(true);
+                break;
+            case 6:
+                upperLeft.setOn(true);
+                upperRight.setOn(false);
+                lowerLeft.setOn(true);
+                lowerRight.setOn(true);
+                top.setOn(true);
+                middle.setOn(true);
+                bottom.setOn(true);
+                break;
+            case 7:
+                upperLeft.setOn(false);
+                upperRight.setOn(true);
+                lowerLeft.setOn(false);
+                lowerRight.setOn(true);
+                top.setOn(true);
+                middle.setOn(false);
+                bottom.setOn(false);
+                break;
+            case 8:
+                upperLeft.setOn(true);
+                upperRight.setOn(true);
+                lowerLeft.setOn(true);
+                lowerRight.setOn(true);
+                top.setOn(true);
+                middle.setOn(true);
+                bottom.setOn(true);
+                break;
+            case 9:
+                upperLeft.setOn(true);
+                upperRight.setOn(true);
+                lowerLeft.setOn(false);
+                lowerRight.setOn(true);
+                top.setOn(true);
+                middle.setOn(true);
+                bottom.setOn(true);
+                break;
+            default:
+                upperLeft.setOn(false);
+                upperRight.setOn(false);
+                lowerLeft.setOn(false);
+                lowerRight.setOn(false);
+                top.setOn(false);
+                middle.setOn(false);
+                bottom.setOn(false);
+                break;
+        }
+    }              
+}
+
