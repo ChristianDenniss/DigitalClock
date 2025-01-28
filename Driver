@@ -22,33 +22,34 @@ public class Driver extends Application
     public void start(Stage primaryStage) 
     {
         Group root = new Group();
-
-        Clock clock1 = new Clock(-70,0);
-        Clock clock2 = new Clock(-70,300);
-        Clock clock3 = new Clock(500,0);
-        Clock clock4 = new Clock(500,300);
+        
+        //default, no params clock
+        Clock clock1 = new Clock();
+        
+        Clock clock2 = new Clock(0,250, 2, 5, 11, true);
+        
+        Clock clock3 = new Clock(0,500, 11, 59, 50, false);
+        
+        //local time clock
+        //Clock clock 4 = new Clock();
        
-        root.getChildren().addAll(clock1.getClockGroup(), clock2.getClockGroup(),clock3.getClockGroup(), clock4.getClockGroup());
+        root.getChildren().addAll(clock1.getClockGroup(), clock2.getClockGroup(),clock3.getClockGroup());
         
         Scene scene = new Scene(root, 800, 600);
   
         scene.setFill(Color.BLACK);
 
-        // Set the stage title
         primaryStage.setTitle("DigitalClock");
 
-        // Set the scene on the stage
         primaryStage.setScene(scene);
 
-        // Show the stage
         primaryStage.show();
         
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> 
         {
-            clock1.updateClock();  
-            clock2.updateClock();  
-            clock3.updateClock();  
-            clock4.updateClock();  
+            clock1.incrementTime();  
+            clock2.incrementTime();  
+            clock3.incrementTime();    
         }));
         
         timeline.setCycleCount(Timeline.INDEFINITE);
