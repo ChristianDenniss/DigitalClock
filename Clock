@@ -1,0 +1,70 @@
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
+import java.time.LocalTime;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import javafx.scene.Node;
+import javafx.scene.Group;
+
+
+public class Clock
+{
+    private Digits digitOne, digitTwo, digitThree, digitFour;
+    private Colon colon;
+     private Group clockGroup; 
+    
+    public Clock()
+    {
+        this.digitOne = new Digits(1);  
+        this.digitTwo = new Digits(2);
+        this.digitThree = new Digits(3);
+        this.digitFour = new Digits(4);
+        this.colon = new Colon(330, 145, 10);
+        
+        clockGroup = new Group();
+        clockGroup.getChildren().addAll(colon.getTopDot(), colon.getBottomDot(), digitOne, digitTwo, digitThree, digitFour);
+    }
+    
+    public Clock(double xPos, double yPos)
+    {
+        this.digitOne = new Digits(1,xPos,yPos);  
+        this.digitTwo = new Digits(2,xPos,yPos);
+        this.digitThree = new Digits(3,xPos,yPos);
+        this.digitFour = new Digits(4,xPos,yPos);
+        this.colon = new Colon(330+xPos, 145+yPos, 10);
+        
+        clockGroup = new Group();
+        clockGroup.getChildren().addAll(colon.getTopDot(), colon.getBottomDot(), digitOne, digitTwo, digitThree, digitFour);
+    }
+    
+    public Group getClockGroup() 
+    {
+        return clockGroup;
+    }
+
+    
+    public void updateClock()
+    {
+        System.out.println("Update clock method called");
+        LocalTime time = LocalTime.now();
+    
+        
+        int hour = time.getHour();
+        int minute = time.getMinute();
+    
+         digitOne.setDigit(hour / 10);      
+        digitTwo.setDigit(hour % 10);      
+        digitThree.setDigit(minute / 10); 
+        digitFour.setDigit(minute % 10);
+    }
+}
