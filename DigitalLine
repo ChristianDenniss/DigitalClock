@@ -51,7 +51,8 @@ public class DigitalLine extends Rectangle
         {
            
             this.setFill(Color.RED);  
-        } else 
+        } 
+        else 
         {
         
             this.setFill(Color.web("333333"));
