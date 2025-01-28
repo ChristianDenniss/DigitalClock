@@ -2,7 +2,6 @@ import javafx.scene.Group;
 
 public class Digits extends Group
 {
-    // Instance variables for the 7 lines that form the digit
     private DigitalLine upperLeft;
     private DigitalLine upperRight;
     private DigitalLine lowerLeft;
@@ -11,7 +10,7 @@ public class Digits extends Group
     private DigitalLine middle;
     private DigitalLine bottom;
 
-    // Constructor that takes an initial position and size for the lines
+
     public Digits(int digNum)
     {
         int x;
@@ -28,9 +27,17 @@ public class Digits extends Group
         {
            x = 290; 
         }
-        else
+        else if(digNum==4)
         {
            x = 410; 
+        }
+        else if(digNum==5)
+        {
+           x = 580; 
+        }
+        else
+        {
+           x = 700; 
         }
         
         this.upperLeft = new DigitalLine(80+x, 50, 10, 80);  
@@ -60,9 +67,17 @@ public class Digits extends Group
         {
            x = 290; 
         }
-        else
+        else if(digNum==4)
         {
            x = 410; 
+        }
+        else if(digNum==5)
+        {
+           x = 580; 
+        }
+        else
+        {
+           x = 700; 
         }
         
         this.upperLeft = new DigitalLine(80+x+xPos, 50+yPos, 10, 80);  
@@ -77,7 +92,6 @@ public class Digits extends Group
     }
 
 
-    // Method to set the digit value (0-9) and activate the corresponding lines
     public void setDigit(int num)
     {   
         switch (num)
@@ -89,7 +103,7 @@ public class Digits extends Group
                 lowerRight.setOn(true);
                 top.setOn(true);
                 bottom.setOn(true);
-                middle.setOn(false);  // 0 doesn't have the middle line
+                middle.setOn(false); 
                 break;
             case 1:
                 upperLeft.setOn(false);
