@@ -39,7 +39,6 @@ public class DigitalLine extends Rectangle
    
     public void setOn(boolean isOn) 
     {   
-        System.out.println("Update setOn method called");
         this.isOn = isOn;
         updateColor(); 
     }
@@ -47,7 +46,6 @@ public class DigitalLine extends Rectangle
    
     private void updateColor() 
     {
-        System.out.println("Update color method called");
         
         if (isOn) 
         {
