@@ -1,10 +1,12 @@
 # Digital Clock Application
 
-This is a simple digital clock application built using JavaFX. The app displays the current time in a digital clock format, updating every second. It consists of four digits representing the hour and minute, along with a colon (`:`) separating them. The application uses basic JavaFX features such as scene creation, animation, and timeline updates.
+This is a simple digital clock application built using JavaFX. The app displays the current time in a digital clock format, updating every second. It consists of four digits representing the hour and minute, along with a colon (`:`) separating them, and now supports displaying seconds, along with AM/PM for 12-hour format and 24-hour format.
 
 ## Features
 - Real-time digital clock display
-- Hour and minute are displayed in a digital format
+- Hour, minute, and second are displayed in a digital format
+- AM/PM support for 12-hour format (optional toggle)
+- 24-hour format display option
 - Updates every second
 - Black background with white digits for visibility
 - Uses JavaFX animation and timeline to update the clock every second
@@ -15,9 +17,10 @@ This is a simple digital clock application built using JavaFX. The app displays 
 
 ## Setup and Installation
 
-1. **Clone the repository (if applicable)**:
+1. **Clone the repository (if applicable):**
    ```bash
    git clone https://github.com/yourusername/digital-clock.git
+
    
 2. **Compile and run the application:**
 If you're using an IDE such as IntelliJ IDEA, Eclipse, or NetBeans, simply open the project and run the Driver class.
