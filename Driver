@@ -23,14 +23,12 @@ public class Driver extends Application
     {
         Group root = new Group();
 
-        Digits digitOne = new Digits(1);
-        Digits digitTwo = new Digits(2);
-        Digits digitThree = new Digits(3);
-        Digits digitFour = new Digits(4);
-        Colon colon = new Colon(330, 145, 10);
-        
-        // Add the digit objects to the root group
-        root.getChildren().addAll(colon.getTopDot(), colon.getBottomDot(), digitOne, digitTwo, digitThree, digitFour);
+        Clock clock1 = new Clock(-70,0);
+        Clock clock2 = new Clock(-70,300);
+        Clock clock3 = new Clock(500,0);
+        Clock clock4 = new Clock(500,300);
+       
+        root.getChildren().addAll(clock1.getClockGroup(), clock2.getClockGroup(),clock3.getClockGroup(), clock4.getClockGroup());
         
         Scene scene = new Scene(root, 800, 600);
   
@@ -45,23 +43,16 @@ public class Driver extends Application
         // Show the stage
         primaryStage.show();
         
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateClock(digitOne, digitTwo, digitThree, digitFour)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> 
+        {
+            clock1.updateClock();  
+            clock2.updateClock();  
+            clock3.updateClock();  
+            clock4.updateClock();  
+        }));
+        
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-    }
-    
-    public void updateClock(Digits one, Digits two, Digits three, Digits four)
-    {
-        System.out.println("Update clock method called");
-        LocalTime time = LocalTime.now();
-    
-        
-        int hour = time.getHour();
-        int minute = time.getMinute();
-    
-        one.setDigit(hour / 10);      
-        two.setDigit(hour % 10);      
-        three.setDigit(minute / 10); 
-        four.setDigit(minute % 10);
+
     }
 }
