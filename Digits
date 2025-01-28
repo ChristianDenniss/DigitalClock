@@ -43,6 +43,39 @@ public class Digits extends Group
         
         this.getChildren().addAll(upperLeft, upperRight, lowerLeft, lowerRight, top, middle, bottom);
     }
+    
+    public Digits(int digNum, double xPos, double yPos)
+    {
+        int x;
+        if(digNum==1)
+        {
+            x = 0;    
+        }
+        
+        else if(digNum==2)
+        {
+           x = 120; 
+        }
+        else if(digNum==3)
+        {
+           x = 290; 
+        }
+        else
+        {
+           x = 410; 
+        }
+        
+        this.upperLeft = new DigitalLine(80+x+xPos, 50+yPos, 10, 80);  
+        this.upperRight = new DigitalLine(160+x+xPos, 50+yPos, 10, 80); 
+        this.lowerLeft = new DigitalLine(80+x+xPos, 150+yPos, 10, 80);  
+        this.lowerRight = new DigitalLine(160+x+xPos, 150+yPos, 10, 80);
+        this.top = new DigitalLine(90+x+xPos, 40+yPos, 70, 10); 
+        this.middle = new DigitalLine(90+x+xPos, 135+yPos, 70, 10); 
+        this.bottom = new DigitalLine(90+x+xPos, 230+yPos, 70, 10); 
+        
+        this.getChildren().addAll(upperLeft, upperRight, lowerLeft, lowerRight, top, middle, bottom);
+    }
+
 
     // Method to set the digit value (0-9) and activate the corresponding lines
     public void setDigit(int num)
@@ -86,7 +119,7 @@ public class Digits extends Group
                 bottom.setOn(true);
                 break;
             case 4:
-                upperLeft.setOn(false);
+                upperLeft.setOn(true);
                 upperRight.setOn(true);
                 lowerLeft.setOn(false);
                 lowerRight.setOn(true);
