@@ -19,9 +19,12 @@ import javafx.scene.Group;
 
 public class Clock
 {
-    private Digits digitOne, digitTwo, digitThree, digitFour;
-    private Colon colon;
-     private Group clockGroup; 
+    private Digits digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix;
+    private Colon colon1, colon2;
+    private Group clockGroup; 
+    private AmOrPm amCheck;
+    private int hour, minute, seconds;
+    private boolean customTime, isAm;
     
     public Clock()
     {
@@ -29,10 +32,68 @@ public class Clock
         this.digitTwo = new Digits(2);
         this.digitThree = new Digits(3);
         this.digitFour = new Digits(4);
-        this.colon = new Colon(330, 145, 10);
+        this.digitFive = new Digits(5);
+        this.digitSix = new Digits(6);
+        
+        this.colon1 = new Colon(330, 145, 10);
+        this.colon2 = new Colon(625, 145, 10);
+        customTime = true;
+        amCheck = new AmOrPm(900,200, true);
+        
+        this.hour = 12;
+        this.minute = 0;
+        this.seconds = 0;
+        this.isAm = false;
         
         clockGroup = new Group();
-        clockGroup.getChildren().addAll(colon.getTopDot(), colon.getBottomDot(), digitOne, digitTwo, digitThree, digitFour);
+        clockGroup.getChildren().addAll(amCheck.getLabel(), colon2.getTopDot(), colon2.getBottomDot(), colon1.getTopDot(), colon1.getBottomDot(), digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix);
+    }
+    
+    public Clock(int hour, int minute, int seconds, boolean isAm) 
+    {
+        this.hour = hour;
+        this.minute = minute;
+        this.seconds = seconds;
+
+        this.digitOne = new Digits(1);  
+        this.digitTwo = new Digits(2);
+        this.digitThree = new Digits(3);
+        this.digitFour = new Digits(4);
+        this.digitFive = new Digits(5);
+        this.digitSix = new Digits(6);
+        this.isAm = isAm;
+        
+        this.colon1 = new Colon(330, 145, 10);
+        this.colon2 = new Colon(625, 145, 10);
+        amCheck = new AmOrPm(900,200, isAm);
+        customTime = true;
+
+        clockGroup = new Group();
+        clockGroup.getChildren().addAll(amCheck.getLabel(), colon2.getTopDot(), colon2.getBottomDot(), colon1.getTopDot(), colon1.getBottomDot(), digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix);
+    }
+
+    
+    public Clock(double xPos, double yPos, int hour, int minute, int seconds, boolean isAm) 
+    {
+        this.hour = hour;
+        this.minute = minute;
+        this.seconds = seconds;
+
+        this.digitOne = new Digits(1, xPos, yPos);  
+        this.digitTwo = new Digits(2, xPos, yPos);
+        this.digitThree = new Digits(3, xPos, yPos);
+        this.digitFour = new Digits(4, xPos, yPos);
+        this.digitFive = new Digits(5, xPos, yPos);
+        this.digitSix = new Digits(6, xPos, yPos);
+        this.isAm = isAm;
+        
+        this.colon1 = new Colon(330+xPos, 145+yPos, 10);
+        this.colon2 = new Colon(625+xPos, 145+yPos, 10);
+        amCheck = new AmOrPm(900+xPos,200+yPos, isAm);
+        customTime = true;
+
+        clockGroup = new Group();
+        clockGroup.getChildren().addAll(amCheck.getLabel(), colon2.getTopDot(), colon2.getBottomDot(), colon1.getTopDot(), colon1.getBottomDot(), digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix);
     }
     
     public Clock(double xPos, double yPos)
@@ -41,10 +102,21 @@ public class Clock
         this.digitTwo = new Digits(2,xPos,yPos);
         this.digitThree = new Digits(3,xPos,yPos);
         this.digitFour = new Digits(4,xPos,yPos);
-        this.colon = new Colon(330+xPos, 145+yPos, 10);
+        this.digitFive = new Digits(5, xPos, yPos);
+        this.digitSix = new Digits(6, xPos, yPos);
+        this.isAm = true;
+        
+        this.colon1 = new Colon(330+xPos, 145+yPos, 10);
+        this.colon2 = new Colon(625+xPos, 145+yPos, 10);
+        amCheck = new AmOrPm(900+xPos,200+yPos, false);
+        
+        this.hour = 12;
+        this.minute = 0;
+        this.seconds = 0;
+        customTime = false;
         
         clockGroup = new Group();
-        clockGroup.getChildren().addAll(colon.getTopDot(), colon.getBottomDot(), digitOne, digitTwo, digitThree, digitFour);
+        clockGroup.getChildren().addAll(amCheck.getLabel(), colon2.getTopDot(), colon2.getBottomDot(), colon1.getTopDot(), colon1.getBottomDot(), digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix);
     }
     
     public Group getClockGroup() 
@@ -52,19 +124,102 @@ public class Clock
         return clockGroup;
     }
 
+    private void updateTimeDisplay() 
+    {
+        digitOne.setDigit(hour / 10);     
+        digitTwo.setDigit(hour % 10);      
+        digitThree.setDigit(minute / 10);            
+        digitFour.setDigit(minute % 10);  
+        digitFive.setDigit(seconds / 10);  
+        digitSix.setDigit(seconds % 10);
+    }
+    
+    private void convertTo12HourFormat() 
+    {
+       
+        if (hour == 0) 
+        {
+            hour = 12;
+            isAm = true;
+        } 
+        
+        else if (hour == 12) 
+        {
+            isAm = false;
+        } 
+        
+        else if (hour > 12) 
+        {
+            hour -= 12;
+            isAm = false;
+        }
+        
+        else 
+        {
+            isAm = true;
+        }
+        
+        amCheck.toggle(isAm);
+    }
+
     
     public void updateClock()
+    {   
+        if( customTime)
+        {
+            convertTo12HourFormat();
+            updateTimeDisplay();
+        }
+        else
+        {
+            LocalTime time = LocalTime.now();
+            hour = time.getHour();
+            minute = time.getMinute();
+            seconds = time.getSecond();
+            convertTo12HourFormat();
+            updateTimeDisplay();
+        }
+    }
+    
+    public void incrementTime() 
     {
-        System.out.println("Update clock method called");
-        LocalTime time = LocalTime.now();
-    
+        seconds++;  
         
-        int hour = time.getHour();
-        int minute = time.getMinute();
+        //increment minutes
+        if(seconds >= 60)
+        {
+            minute ++;
+            seconds = 0;
+        }
+        
+        // Increment hour and reset mins
+        if (minute == 60) 
+        {
+            minute = 0;
+            hour++;  
+        }
     
-         digitOne.setDigit(hour / 10);      
-        digitTwo.setDigit(hour % 10);      
-        digitThree.setDigit(minute / 10); 
-        digitFour.setDigit(minute % 10);
+        // Reset to 00:00 after 23:59
+        if (hour == 24) 
+        {
+            hour = 0;  
+        }
+    
+        updateClock();  
+    }
+
+   
+    public void setTime(int hour, int minute, int seconds) 
+    {
+        this.hour = hour;
+        this.minute = minute;
+        this.seconds = seconds;
+        updateClock(); 
+    }
+
+    
+    public String getCurrentTime() 
+    {
+        return String.format("%02d:%02d:%02d", hour, minute, seconds);
     }
 }
